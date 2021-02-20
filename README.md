@@ -1,9 +1,11 @@
-## How to search for other COVID Vaccine apps when they wont show up on google
+# BeastMode
 
-Well, if youre looking for other COVID vaccine tracking apps, you could just use https://VacFind.org, since we've already done this.
+This repository intends to create an open-source tool that is similarin functionality to namecheap's "beast mode" domain name search tool.
+
+This repository was originally created to help [vacfind.org](https://vacfind.org) find state and local covid-related tools by checking all domain names of a similar pattern, such as [vaccinateca.com](https://vaccinateca.com) and [vaccinatema.com](https://vaccinatema.com)
 
 
-nevertheless here are some steps:
+## How to generate domain names with this script
 
 1. generate a list of the domains you want to check via your favorite method. If theres enough interest I can make a python script to make this easier.
 2. use a bulk WHOIS tool like [this](https://www.bulkseotools.com/bulk-whois-lookup.php) to look up who registered the domains
