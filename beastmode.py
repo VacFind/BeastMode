@@ -1,4 +1,3 @@
-#!/bin/bash
 
 for tld in {com,net,org}
 do
