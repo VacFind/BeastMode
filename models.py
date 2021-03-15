@@ -1,7 +1,19 @@
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, Date
 
+import EnumAsInteger from enumtype
+import Status from models
+
 Base = declarative_base()
+
+class Status(Enum):
+    OK = 0
+    PENDING = 1
+    CANCELED = 2
+    DUPLICATE = 3
+    INCOMING = 4
+    BLOCKED = 5
+
 
 class Domain(Base):
 	__tablename__ = 'domains'
@@ -16,6 +28,7 @@ class Domain(Base):
 	owner_email = Column(String)
 	owner_phone = Column(String)
 	nameserver = Column(String)
+	status = Column(EnumAsInteger(Status), nullable=False)
 	parameters = Column(String)
 
 	def __repr__(self):
