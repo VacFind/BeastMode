@@ -7,12 +7,9 @@ import Status from models
 Base = declarative_base()
 
 class Status(Enum):
-    OK = 0
-    PENDING = 1
-    CANCELED = 2
-    DUPLICATE = 3
-    INCOMING = 4
-    BLOCKED = 5
+    UNKNOWN = 0
+    PENDING = 1 # NEW
+    UNREGISTERED = 2
 
 
 class Domain(Base):
