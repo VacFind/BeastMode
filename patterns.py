@@ -26,6 +26,9 @@ def get_iterations(tokens):
 			values.append([])
 	return list(itertools.product(*values))
 
+def sanitize_domain(domain):
+	return domain.replace(" ", "")
+
 
 def generate_names(pattern_string):
 	tokens = get_tokens(pattern_string)
@@ -35,6 +38,6 @@ def generate_names(pattern_string):
 	for iteration in iterations:
 		substitutions = dict([(tokens[i], iteration[i]) for i in range(0,len(tokens))])
 		name = pattern_string.format(**substitutions)
-		names.append(name)
+		names.append(sanitize_domain(name))
 	
 	return names
