@@ -35,6 +35,9 @@ class Domain(Base):
 			return Status.UNREGISTERED
 		else:
 			return Status.REGISTERED
+	
+	def get_json_parameters(self):
+		return json.parses(self.parameters)
 
 	def __repr__(self):
 		return "<Domain(domainname='%s', registrar='%s', expires='%s', params='%s')>" % (
