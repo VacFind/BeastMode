@@ -1,4 +1,7 @@
 # this script parses the data from the existing CSV into the database
+# this script is not currently used as it was only needed one time and is here for future reference. it has been placed in this `tools` folder so it is clearly separate
+# in order to work it needs to be moved out of this folder due to issues with the imports
+
 from patterns import generate_names
 from database import session
 from models import Domain
