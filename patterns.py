@@ -33,15 +33,12 @@ def sanitize_pattern_value(value):
 	return value.replace(" ", "").replace(".", "").lower()
 
 
-def generate_names(pattern_string):
+def generate_substitutions_for_pattern(pattern_string):
 	tokens = get_tokens(pattern_string)
 	iterations = get_iterations(tokens)
-	names = []
+	return [dict_from_kv(tokens, iteration, lambda x:sanitize_pattern_value(x)) for iteration in iterations]
 
-	for iteration in iterations:
+def dict_from_kv(keys, values, value_filter=lambda x: x):
+	return dict([(keys[i], value_filter(values[i])) for i in range(0,len(keys))])
 
-		substitutions = dict([(tokens[i], sanitize_pattern_value(iteration[i])) for i in range(0,len(tokens))])
-		name = pattern_string.format(**substitutions)
-		names.append(sanitize_domain(name))
-	
-	return names
+
