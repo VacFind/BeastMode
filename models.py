@@ -26,7 +26,6 @@ class Domain(Base):
 	owner_email = Column(String)
 	owner_phone = Column(String)
 	nameserver = Column(String)
-	status = Column(EnumAsInteger(Status), nullable=True)
 	parameters = Column(String)
 
 	def __repr__(self):
