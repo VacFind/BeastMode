@@ -8,3 +8,11 @@ Base.metadata.create_all(engine)
 
 Session = sessionmaker(bind=engine)
 session = Session()
+
+
+def add_from_name_list(names)
+	newDomains = [Domain(domainname=name) for name in names]
+
+	session.add_all(newDomains)
+	session.commit()
+
