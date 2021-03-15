@@ -20,7 +20,7 @@ depends_on = None
 
 
 def upgrade():
-    op.add_column('domains', sa.Column('status', EnumAsInteger(Status), nullable=False))
+    op.add_column('domains', sa.Column('status', EnumAsInteger(Status), nullable=True))
     
 
 def downgrade():

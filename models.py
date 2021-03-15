@@ -7,7 +7,7 @@ import Status from models
 Base = declarative_base()
 
 class Status(Enum):
-    UNKNOWN = 0
+    UNKNOWN = None
     PENDING = 1 # NEW
     UNREGISTERED = 2
 
@@ -25,7 +25,7 @@ class Domain(Base):
 	owner_email = Column(String)
 	owner_phone = Column(String)
 	nameserver = Column(String)
-	status = Column(EnumAsInteger(Status), nullable=False)
+	status = Column(EnumAsInteger(Status), nullable=True)
 	parameters = Column(String)
 
 	def __repr__(self):
