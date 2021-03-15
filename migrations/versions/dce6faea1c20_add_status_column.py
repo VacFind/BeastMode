@@ -8,8 +8,8 @@ Create Date: 2021-03-15 08:04:11.714082
 from alembic import op
 import sqlalchemy as sa
 
-import EnumAsInteger from enumtype
-import Status from models
+from enumtype import EnumAsInteger 
+from models import Status
 
 
 # revision identifiers, used by Alembic.

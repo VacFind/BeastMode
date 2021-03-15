@@ -1,8 +1,8 @@
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, Date
 
-import EnumAsInteger from enumtype
-import Status from models
+from enumtype import EnumAsInteger 
+from enum import Enum
 
 Base = declarative_base()
 
