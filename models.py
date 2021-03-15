@@ -26,7 +26,7 @@ class Domain(Base):
 	owner_email = Column(String)
 	owner_phone = Column(String)
 	nameserver = Column(String)
-	parameters = Column(String)
+	parameters = Column(String, default="{}")
 
 	def get_status(self):
 		if self.registrar == None:
