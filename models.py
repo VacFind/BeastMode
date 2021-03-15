@@ -28,6 +28,14 @@ class Domain(Base):
 	nameserver = Column(String)
 	parameters = Column(String)
 
+	def get_status(self):
+		if self.registrar == None:
+			return Status.UNKNOWN
+		elif self.registrar == "Available":
+			return Status.UNREGISTERED
+		else:
+			return Status.REGISTERED
+
 	def __repr__(self):
 		return "<Domain(domainname='%s', registrar='%s', expires='%s', params='%s')>" % (
 							self.domainname, self.registrar, self.date_expires, self.parameters)
