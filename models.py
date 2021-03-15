@@ -7,9 +7,9 @@ from enum import Enum
 Base = declarative_base()
 
 class Status(Enum):
-    UNKNOWN = None
-    PENDING = 1 # NEW
-    UNREGISTERED = 2
+	UNKNOWN = None
+	PENDING = 1 # NEW
+	UNREGISTERED = 2
 	REGISTERED = 3
 
 
