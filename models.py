@@ -10,6 +10,7 @@ class Status(Enum):
     UNKNOWN = None
     PENDING = 1 # NEW
     UNREGISTERED = 2
+	REGISTERED = 3
 
 
 class Domain(Base):
