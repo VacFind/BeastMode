@@ -18,6 +18,7 @@ def get_whois_for_domain(domain, dryrun=False):
 	r = requests.post('https://www.bulkseotools.com/json/bulk-whois-lookup.php', data=body, headers=headers)
 
 	if r.status_code == 200:
+		logger.info("successful WHOIS fetch for " + domain.domainname)
 		return r.json()
 	else:
 		logger.error("fetching whois for " + domain.domainname + " failed with code " + r.status_code)

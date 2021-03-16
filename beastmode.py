@@ -19,6 +19,7 @@ parser.add_argument("--dryrun", "-n", action="store_true", help="process the pat
 parser.add_argument('-v', '--verbose', action='count', default=0)
 
 
+# TODO: possibly store and check against patterns already tried
 def generate_from_pattern_file(filename, database=None):
 	with open(filename, "r") as patterns_file:
 		for pattern in patterns_file.readlines():
@@ -53,10 +54,13 @@ if __name__ == "__main__":
 
 	logging.basicConfig(level=loglevel)
 	logger.info("starting up")
+
+	# init db
 	connection_str = os.environ.get("DB_CONNECTION_STRING", "sqlite:///domains.db")
 	database = BeastModeDB(connection_string=connection_str)
 	db_to_pass = database if not args.dryrun else None
 
+	# process new entries if any)
 	if args.file:
 		logger.info("detected pattern file")
 		generate_from_pattern_file(args.file, database=db_to_pass)
