@@ -1,7 +1,9 @@
 from patterns import generate_domains
 from database import add_domains
 
-import argparse
+import argparse, logging
+
+logger = logging.getLogger(__name__)
 
 parser = argparse.ArgumentParser(description='generate and check a list of domains from patterns')
 group = parser.add_mutually_exclusive_group()
@@ -17,23 +19,24 @@ def generate_from_pattern_file(filename, dryrun=False):
 
 def process_pattern(pattern, dryrun=False):
 	pattern = pattern.strip()
-	print("processing pattern: " + pattern)
+	logger.info("processing pattern: " + pattern)
 	domains = generate_domains(pattern)
 
 	for domain in domains:
 		if not domain.has_valid_domain_name():
-			print("invalid domain name: " + domain.domainname)
+			logger.warn("invalid domain name: " + domain.domainname)
 			return
 	
 	add_domains(domains, dryrun=dryrun)
 	if dryrun:
-		print("Would process " + str(len(domains)) + " domains")
+		logger.info("Would process " + str(len(domains)) + " domains")
 
 
 if __name__ == "__main__":
 	args = parser.parse_args()
-	print(args)
 	if args.file:
+		logger.info("detected pattern file")
 		generate_from_pattern_file(args.file, dryrun=args.dryrun)
 	elif args.pattern:
+		logger.info("detected pattern parameter")
 		process_pattern(args.pattern, dryrun=args.dryrun)
