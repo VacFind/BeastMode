@@ -1,5 +1,6 @@
 import requests
 import time
+from random import randint
 import logging
 
 logger = logging.getLogger(__name__)
@@ -28,4 +29,6 @@ def get_whois_for_domain_list(domains, dryrun=False):
 		whois = get_whois_for_domain(domain, dryrun=dryrun)
 		if whois:
 			domain.set_whois_data(whois)
-		
+	sleeptime=randint(1000, 4000)
+	logger.info("sleeping for " + str(sleeptime))
+	time.sleep(sleeptime)
