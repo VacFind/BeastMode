@@ -25,6 +25,9 @@ def get_whois_for_domain(domain, dryrun=False):
 		return
 
 def get_whois_for_domain_list(domains, dryrun=False):
+	if len(domains) == 0:
+		return
+	
 	for domain in domains:
 		whois = get_whois_for_domain(domain, dryrun=dryrun)
 		if whois:
