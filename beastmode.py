@@ -15,7 +15,8 @@ parser.add_argument("--dryrun", "-n", action="store_true", help="process the pat
 def generate_from_pattern_file(filename, dryrun=False):
 	with open(filename, "r") as patterns_file:
 		for pattern in patterns_file.readlines():
-			process_pattern(pattern, dryrun=dryrun)
+			if not pattern.strip().startswith("#"):
+				process_pattern(pattern, dryrun=dryrun)
 
 def process_pattern(pattern, dryrun=False):
 	pattern = pattern.strip()
