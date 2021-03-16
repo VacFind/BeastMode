@@ -1,5 +1,5 @@
 from patterns import generate_domains
-from database import add_domains
+from database import BeastModeDB
 
 import argparse, logging
 
@@ -12,13 +12,13 @@ group.add_argument('--pattern', "-p", type=str,  help='import domains from a sin
 parser.add_argument("--dryrun", "-n", action="store_true", help="process the patterns but dont actually write to the database or do any actual fetching")
 
 
-def generate_from_pattern_file(filename, dryrun=False):
+def generate_from_pattern_file(filename, database=None):
 	with open(filename, "r") as patterns_file:
 		for pattern in patterns_file.readlines():
 			if not pattern.strip().startswith("#") and len(pattern.strip()) > 0:
-				process_pattern(pattern, dryrun=dryrun)
+				process_pattern(pattern, database=database)
 
-def process_pattern(pattern, dryrun=False):
+def process_pattern(pattern, database=None):
 	pattern = pattern.strip()
 	logger.info("processing pattern: " + pattern)
 	domains = generate_domains(pattern)
@@ -28,16 +28,20 @@ def process_pattern(pattern, dryrun=False):
 			logger.warn("invalid domain name: " + domain.domainname)
 			return
 	
-	add_domains(domains, dryrun=dryrun)
-	if dryrun:
+	if database:
+		database.add_domains(domains, dryrun=dryrun)
+	else:
 		logger.info("Would process " + str(len(domains)) + " domains")
 
 
 if __name__ == "__main__":
 	args = parser.parse_args()
+	database = BeastModeDB(connection_string=args.connection_string)
+	db_to_pass = database if not args.dryrun else None
+
 	if args.file:
 		logger.info("detected pattern file")
-		generate_from_pattern_file(args.file, dryrun=args.dryrun)
+		generate_from_pattern_file(args.file, database=db_to_pass)
 	elif args.pattern:
 		logger.info("detected pattern parameter")
-		process_pattern(args.pattern, dryrun=args.dryrun)
+		process_pattern(args.pattern, database=db_to_pass)
