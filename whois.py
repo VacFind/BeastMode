@@ -32,6 +32,6 @@ def get_whois_for_domain_list(domains, dryrun=False):
 		whois = get_whois_for_domain(domain, dryrun=dryrun)
 		if whois:
 			domain.set_whois_data(whois)
-	sleeptime=random.uniform(1, 4)
-	logger.info("sleeping for " + str(sleeptime))
-	time.sleep(sleeptime)
+		sleeptime=random.uniform(1, 4)
+		logger.info("sleeping for " + str(sleeptime))
+		time.sleep(sleeptime)
