@@ -50,6 +50,9 @@ class Domain(Base):
 	
 	def get_json_parameters(self):
 		return json.parses(self.parameters)
+	
+	def set_json_parameters(self, parameters):
+		self.parameters = json.dumps(parameters)
 
 	def __repr__(self):
 		return "<Domain(domainname='%s', registrar='%s', expires='%s', params='%s')>" % (

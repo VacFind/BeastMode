@@ -51,7 +51,9 @@ def generate_domains(pattern_string):
 		state_code = get_state_code_from_substitution_value(substitution)
 		if substitution:
 			parameters = { "state": state_code }
-		domains.append(Domain(domainname=domain, parameters=parameters))
+			domain = Domain(domainname=domain)
+			domain.set_json_parameters(parameters)
+		domains.append(domain)
 
 	return domains
 		
