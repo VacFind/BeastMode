@@ -9,6 +9,7 @@ parser = argparse.ArgumentParser(description='generate and check a list of domai
 group = parser.add_mutually_exclusive_group()
 group.add_argument('--file', type=str, help='import domains using a file with one pattern per line. mutually exclusive with --pattern')
 group.add_argument('--pattern', "-p", type=str,  help='import domains from a single pattern string. mutually exclusive with --file')
+parser.add_argument("--whois", action="store_true", help="process WHOIS data for new domains (this can take a lot of time)")
 parser.add_argument("--dryrun", "-n", action="store_true", help="process the patterns but dont actually write to the database or do any actual fetching")
 
 
