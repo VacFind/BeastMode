@@ -23,3 +23,9 @@ class BeastModeDB:
 			session.rollback()
 			self.logger.error("An error occurred while inserting into database")
 			self.logger.error(e)
+
+	def get_new_domains(self, batch_size=None):
+		query = self.session.query(Domain).filter_by(registrar=None)
+		if batch_size is not None:
+			query = query.limit(batch_size)
+		return query.all()
