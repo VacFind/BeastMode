@@ -20,11 +20,7 @@ def process_pattern(pattern, dryrun=False):
 	print("processing pattern: " + pattern)
 	domains = generate_domains(pattern)
 	if not dryrun:
-		try:
-			add_domains(names)
-		except exc.SQLAlchemyError as e:
-			print("An error occurred. skipping this pattern")
-			print(e)
+		add_domains(domains)
 	else:
 		print("Would process " + str(len(domains)) + " domains")
 

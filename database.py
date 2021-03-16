@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, SQLAlchemyError
 from sqlalchemy.orm import sessionmaker
 from models import Base, Domain
 
@@ -11,6 +11,10 @@ session = Session()
 
 
 def add_domains(domains):
-	session.add_all(domains)
-	session.commit()
 
+	try:
+		session.add_all(domains)
+		session.commit()
+	except SQLAlchemyError as e:
+		print("An error occurred while inserting into database")
+		print(e)
