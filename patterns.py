@@ -63,7 +63,17 @@ def get_state_code_from_substitution_value(substitution_dict):
 			return substitution_dict[key]
 		elif key == 'state_name':
 			# TODO: remove assumption that the state name and code dicts are in the same order
-			state_name_index = patterns[key].index(substitution_dict[key])
-			state_code = substitution_dict['state_code'][state_name_index]
-			return state_code
+			return cross_match(substitution_dict[key], patterns[key], patterns['state_code'])
 	return
+
+# gets a matching value in the target list using the ksy's index in the source list
+def cross_match(key, source_list, target_list):
+
+	source_value_index = source_list.index(key) if key in source_list else None
+	if not source_value_index:
+		source_value_index = source_list.index(sanitize_pattern_value(key)) if key in source_list else None
+
+	if not source_value_index:
+		return None
+		
+	return target_list[source_value_index]
