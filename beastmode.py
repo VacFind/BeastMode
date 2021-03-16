@@ -2,6 +2,10 @@ from patterns import generate_domains
 from database import BeastModeDB
 
 import argparse, logging
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 logger = logging.getLogger(__name__)
 
@@ -37,7 +41,8 @@ def process_pattern(pattern, database=None):
 
 if __name__ == "__main__":
 	args = parser.parse_args()
-	database = BeastModeDB(connection_string=args.connection_string)
+	connection_str = os.environ.get("DB_CONNECTION_STRING", "sqlite:///domains.db")
+	database = BeastModeDB(connection_string=connection_str)
 	db_to_pass = database if not args.dryrun else None
 
 	if args.file:

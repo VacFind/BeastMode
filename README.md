@@ -4,6 +4,11 @@ This repository intends to create an open-source tool that is similarin function
 
 This repository was originally created to help [vacfind.org](https://vacfind.org) find state and local covid-related tools by checking all domain names of a similar pattern, such as [vaccinateca.com](https://vaccinateca.com) and [vaccinatema.com](https://vaccinatema.com)
 
+## Environment Variables
+
+`DB_CONNECTION_STRING` - specify a DB connection string. defaults to `sqlite:///domains.db`.
+
+
 
 ## How to generate domain names with this script
 
