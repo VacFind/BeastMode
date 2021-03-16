@@ -1,6 +1,16 @@
-from patterns import generate_names
+from patterns import generate_domains
 from database import add_domains
 
-names = generate_names("coronavirus{state_name}.{tld}")
+def generate_from_pattern_file(filename):
+	with open(filename, "r") as patterns_file:
+		for pattern in patterns_file.readlines():
+			pattern = pattern.strip()
+			print("processing pattern: " + pattern)
+			domains = generate_domains(pattern)
+			try:
+				add_domains(names)
+			except exc.SQLAlchemyError as e:
+				print("An error occurred. skipping this pattern")
+				print(e)
 
 
