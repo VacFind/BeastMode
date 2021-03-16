@@ -15,11 +15,10 @@ class BeastModeDB:
 		Session = sessionmaker(bind=engine)
 		return Session()
 
-	def add_domains(self, domains, dryrun=False):
+	def add_domains(self, domains):
 		try:
-			if not dryrun:
-				self.session.add_all(domains)
-				self.session.commit()
+			self.session.add_all(domains)
+			self.session.commit()
 		except SQLAlchemyError as e:
 			session.rollback()
 			self.logger.error("An error occurred while inserting into database")
