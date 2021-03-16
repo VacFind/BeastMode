@@ -21,6 +21,7 @@ class BeastModeDB:
 
 	def commit(self):
 		try:
+			self.logger.info("committing to DB")
 			self.session.commit()
 		except SQLAlchemyError as e:
 			session.rollback()

@@ -39,5 +39,4 @@ def get_whois_for_domain_list(domains, database=None):
 		time.sleep(sleeptime)
 	
 	if database:
-		logger.info("committing to DB")
 		database.commit()
