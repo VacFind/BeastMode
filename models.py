@@ -3,6 +3,7 @@ from sqlalchemy import Column, Integer, String, Date
 
 from enumtype import EnumAsInteger 
 from enum import Enum
+import json
 
 Base = declarative_base()
 
