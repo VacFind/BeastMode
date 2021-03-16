@@ -4,13 +4,14 @@ from sqlalchemy.orm import sessionmaker
 from models import Base, Domain
 import logging
 
-engine = create_engine('sqlite:///domains.db', echo=False)
 logger = logging.getLogger(__name__)
 
-Base.metadata.create_all(engine)
+def new_session(connection_string='sqlite:///domains.db'):
+	engine = create_engine(connection_string, echo=False)
+	Base.metadata.create_all(engine)
+	Session = sessionmaker(bind=engine)
+	return Session()
 
-Session = sessionmaker(bind=engine)
-session = Session()
 
 
 def add_domains(domains, dryrun=False):
