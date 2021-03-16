@@ -17,5 +17,6 @@ def add_domains(domains, dryrun=False):
 			session.add_all(domains)
 			session.commit()
 	except SQLAlchemyError as e:
+		session.rollback()
 		print("An error occurred while inserting into database")
 		print(e)
