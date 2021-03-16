@@ -29,3 +29,10 @@ def process_pattern(pattern, dryrun=False):
 		print("Would process " + str(len(domains)) + " domains")
 
 
+if __name__ == "__main__":
+	args = parser.parse_args()
+	print(args)
+	if args.file:
+		generate_from_pattern_file(args.file, dryrun=args.dryrun)
+	elif args.pattern:
+		process_pattern(args.pattern, dryrun=args.dryrun)
