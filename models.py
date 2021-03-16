@@ -4,7 +4,7 @@ from helpers import squash_to_none, convert_to_date
 
 from enumtype import EnumAsInteger 
 from enum import Enum
-import json
+import json, validators
 
 Base = declarative_base()
 
@@ -53,6 +53,9 @@ class Domain(Base):
 	
 	def set_json_parameters(self, parameters):
 		self.parameters = json.dumps(parameters)
+	
+	def has_valid_domain_name(self):
+		return validators.domain(self.domainname)
 
 	def __repr__(self):
 		return "<Domain(domainname='%s', registrar='%s', expires='%s', params='%s')>" % (

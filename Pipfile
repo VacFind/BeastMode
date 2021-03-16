@@ -8,6 +8,7 @@ sqlalchemy = "*"
 alembic = "*"
 requests = "*"
 argparse = "*"
+validators = "*"
 
 [dev-packages]
 
