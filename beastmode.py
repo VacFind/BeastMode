@@ -19,6 +19,11 @@ def process_pattern(pattern, dryrun=False):
 	pattern = pattern.strip()
 	print("processing pattern: " + pattern)
 	domains = generate_domains(pattern)
+
+	for domain in domains:
+		if not domain.has_valid_domain_name():
+			print("invalid domain name: " + domain.domainname)
+			return
 	
 	add_domains(domains, dryrun=dryrun)
 	if dryrun:
