@@ -37,7 +37,7 @@ def process_pattern(pattern, database=None):
 			return
 	
 	if database:
-		database.add_domains(domains, dryrun=dryrun)
+		database.add_domains(domains)
 	else:
 		logger.info("Would process " + str(len(domains)) + " domains")
 
