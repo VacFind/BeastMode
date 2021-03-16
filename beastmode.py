@@ -1,5 +1,6 @@
 from patterns import generate_domains
 from database import BeastModeDB
+from whois import get_whois_for_domain_list
 
 import argparse, logging
 from dotenv import load_dotenv
@@ -62,3 +63,10 @@ if __name__ == "__main__":
 	elif args.pattern:
 		logger.info("detected pattern parameter")
 		process_pattern(args.pattern, database=db_to_pass)
+	
+	# fetch whois if any
+	if args.whois > 0:
+		batch_size = args.whois
+		logger.info("fetching WHOIS data with batch size of " + str(batch_size))
+		to_fetch = database.get_new_domains(batch_size=batch_size)
+		get_whois_for_domain_list(to_fetch, dryrun=args.dryrun)
