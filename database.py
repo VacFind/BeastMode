@@ -16,8 +16,11 @@ class BeastModeDB:
 		return Session()
 
 	def add_domains(self, domains):
+		self.session.add_all(domains)
+		self.commit()
+
+	def commit(self):
 		try:
-			self.session.add_all(domains)
 			self.session.commit()
 		except SQLAlchemyError as e:
 			session.rollback()
