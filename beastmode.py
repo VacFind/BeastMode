@@ -5,7 +5,7 @@ import argparse
 
 parser = argparse.ArgumentParser(description='generate and check a list of domains from patterns')
 group = parser.add_mutually_exclusive_group(required=True)
-group.add_argument('--patternfile', type=str)
+group.add_argument('--file', type=str)
 group.add_argument('--pattern', "-p", type=str)
 parser.add_argument("--dryrun", "-n", action="store_true")
 
