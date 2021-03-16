@@ -10,11 +10,11 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 
-def add_domains(domains):
-
+def add_domains(domains, dryrun=False):
 	try:
-		session.add_all(domains)
-		session.commit()
+		if not dryrun:
+			session.add_all(domains)
+			session.commit()
 	except SQLAlchemyError as e:
 		print("An error occurred while inserting into database")
 		print(e)

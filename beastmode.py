@@ -19,9 +19,9 @@ def process_pattern(pattern, dryrun=False):
 	pattern = pattern.strip()
 	print("processing pattern: " + pattern)
 	domains = generate_domains(pattern)
-	if not dryrun:
-		add_domains(domains)
-	else:
+	
+	add_domains(domains, dryrun=dryrun)
+	if dryrun:
 		print("Would process " + str(len(domains)) + " domains")
 
 
