@@ -1,5 +1,6 @@
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, Date
+from helpers import squash_to_none, convert_to_date
 
 from enumtype import EnumAsInteger 
 from enum import Enum
@@ -36,6 +37,16 @@ class Domain(Base):
 			return Status.UNREGISTERED
 		else:
 			return Status.REGISTERED
+
+	def set_whois_data(self, whois_data):
+		self.registrar = squash_to_none(whois_data["registrar"])
+		self.date_created = convert_to_date(whois_data["created"])
+		self.date_expires = convert_to_date(whois_data["expires"])
+		self.owner_name = squash_to_none(whois_data["owner_name"])
+		self.owner_address = squash_to_none(whois_data["owner_address"])
+		self.owner_email = squash_to_none(whois_data["owner_email"])
+		self.owner_phone = squash_to_none(whois_data["owner_phone"])
+		self.nameserver = squash_to_none(whois_data["nserver"])
 	
 	def get_json_parameters(self):
 		return json.parses(self.parameters)
