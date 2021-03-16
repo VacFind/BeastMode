@@ -1,4 +1,5 @@
 import itertools
+from models import Domain
 
 patterns = {
 	"state_code": ["al", "ak", "az", "ar", "ca", "co", "ct", "de", "fl", "ga", "hi", "id", "il", "in", "ia", "ks", "ky", "la", "me", "md", "ma", "mi", "mn", "ms", "mo", "mt", "ne", "nv", "nh", "nj", "nm", "ny", "nc", "nd", "oh", "ok", "or", "pa", "ri", "sc", "sd", "tn", "tx", "ut", "vt", "va", "wa", "wv", "wi", "wy", "dc", "as", "gu", "mp", "pr", "vi"],
@@ -41,4 +42,28 @@ def generate_substitutions_for_pattern(pattern_string):
 def dict_from_kv(keys, values, value_filter=lambda x: x):
 	return dict([(keys[i], value_filter(values[i])) for i in range(0,len(keys))])
 
+def generate_domains(pattern_string):
+	substitutions = generate_substitutions_for_pattern(pattern_string)
+	domains = []
+	for substitution in substitutions:
+		domain = sanitize_domain(pattern_string.format(**substitution))
+		parameters = {}
+		state_code = get_state_code_from_substitution_value(substitution)
+		if substitution:
+			parameters = { "state": state_code }
+		domains.append(Domain(domainname=domain, parameters=parameters))
 
+	return domains
+		
+# this is a bad function with lots of assumptions that is only here for temporary use searching through and generating coronavirus-related domain names for 
+def get_state_code_from_substitution_value(substitution_dict):
+	for key in substitution_dict.keys():
+		if key == 'state_code':
+			# return the state code
+			return substitution_dict[key]
+		elif key == 'state_name':
+			# TODO: remove assumption that the state name and code dicts are in the same order
+			state_name_index = patterns[key].index(substitution_dict[key])
+			state_code = substitution_dict['state_code'][state_name_index]
+			return state_code
+	return
