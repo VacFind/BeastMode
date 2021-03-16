@@ -24,14 +24,19 @@ def get_whois_for_domain(domain, dryrun=False):
 		logger.debug("response: " + vars(r))
 		return
 
-def get_whois_for_domain_list(domains, dryrun=False):
+def get_whois_for_domain_list(domains, database=None):
 	if len(domains) == 0:
 		return
 	
+	dryrun = False if database else True
 	for domain in domains:
 		whois = get_whois_for_domain(domain, dryrun=dryrun)
-		if whois:
+		if whois and database:
 			domain.set_whois_data(whois)
 		sleeptime=random.uniform(1, 4)
 		logger.info("sleeping for " + str(sleeptime))
 		time.sleep(sleeptime)
+	
+	if database:
+		logger.info("committing to DB")
+		database.commit()
