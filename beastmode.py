@@ -5,9 +5,9 @@ import argparse
 
 parser = argparse.ArgumentParser(description='generate and check a list of domains from patterns')
 group = parser.add_mutually_exclusive_group(required=True)
-group.add_argument('--file', type=str)
-group.add_argument('--pattern', "-p", type=str)
-parser.add_argument("--dryrun", "-n", action="store_true")
+group.add_argument('--file', type=str, help='import domains using a file with one pattern per line. mutually exclusive with --pattern')
+group.add_argument('--pattern', "-p", type=str,  help='import domains from a single pattern string. mutually exclusive with --file')
+parser.add_argument("--dryrun", "-n", action="store_true", help="process the patterns but dont actually write to the database or do any actual fetching")
 
 
 def generate_from_pattern_file(filename, dryrun=False):
